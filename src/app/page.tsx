@@ -56,6 +56,10 @@ export default function Home() {
     setForm({ lot: "", reagent: "", expiry: "", status: "Compliant", notes: "" });
   }
 
+  function handleDelete(index: number) {
+    setLots((current) => current.filter((_, i) => i !== index));
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <main className="mx-auto flex min-h-screen max-w-6xl flex-col gap-10 px-6 py-10 sm:px-10">
@@ -89,6 +93,7 @@ export default function Home() {
                     <th className="px-5 py-4">Expiry</th>
                     <th className="px-5 py-4">Status</th>
                     <th className="px-5 py-4">Notes</th>
+                    <th className="px-5 py-4">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 bg-white dark:divide-slate-800 dark:bg-slate-950">
@@ -101,6 +106,15 @@ export default function Home() {
                         {item.status}
                       </td>
                       <td className="px-5 py-4 text-slate-600 dark:text-slate-400">{item.notes}</td>
+                      <td className="px-5 py-4">
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(index)}
+                          className="rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-600"
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
